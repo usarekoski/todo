@@ -14,6 +14,8 @@ app.use(bodyParser.json()); // for parsing application/json
 
 // register Routes
 app.use("/api/todos", todoListController);
+// Serve files in public directory
+app.use(express.static('public'));
 
 // start the server
 app.listen(PORT, function() {
