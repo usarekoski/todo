@@ -2,7 +2,7 @@ const path = require('path');
 
 
 module.exports = {
-  context: path.join(__dirname, "app"),
+  context: path.join(__dirname, "client"),
   entry: "./js/app.js",
   module: {
     loaders: [
@@ -30,7 +30,7 @@ module.exports = {
   },
 
   output: {
-    path: path.join(__dirname, "build"),
+    path: path.join(__dirname, "public"),
     filename: "bundle.min.js",
   }
 
