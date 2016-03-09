@@ -2,7 +2,7 @@
   "name": "todo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
@@ -24,6 +24,7 @@
     "flux": "^2.1.1",
     "keymirror": "^0.1.1",
     "node-sass": "^3.4.2",
+    "proxy-middleware": "^0.15.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "sass-loader": "^3.1.2",
