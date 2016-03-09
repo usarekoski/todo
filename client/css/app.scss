@@ -1,0 +1,9 @@
+$font-stack: 'Lato', sans-serif;
+$text-color: #242B2E;
+$primary-color: #D1BE7B;
+$secondary-color: #CC5C37;
+
+body, html {
+  font: 100% $font-stack;
+  color: $text-color;
+}
