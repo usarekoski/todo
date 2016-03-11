@@ -4,6 +4,7 @@ import TodoStore from "../stores/todoStore";
 import * as TodoActions from "../actions/todoActions";
 
 import TodoList from "./todoList";
+import TodoForm from "./todoForm";
 
 export default class TodoContainer extends React.Component {
 
@@ -29,8 +30,9 @@ export default class TodoContainer extends React.Component {
     const { todos } = this.state;
 
     return (
-      <div className="todoContainer">
-        <TodoList todos={todos} />
+      <div className = "todoContainer" >
+        <TodoForm />
+        <TodoList todos = {todos} />
       </div>
     );
   }

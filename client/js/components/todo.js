@@ -15,16 +15,16 @@ export default class Todo extends React.Component {
     });
 
     return (
-      <div className={classes}>
+      <div className = {classes}>
         <label>
           <input
-            type="checkbox"
-            onChange={onDoneClick}
-            checked={done}
+            type = "checkbox"
+            onChange = {onDoneClick}
+            checked = {done}
           />
           {text}
         </label>
-        <a className="remove" onClick = {onDeleteClick}>
+        <a className = "remove" onClick = {onDeleteClick}>
           <i className = "fa fa-times"></i>
         </a>
       </div>
