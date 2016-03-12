@@ -29,11 +29,11 @@ export default class TodoContainer extends React.Component {
     TodoStore.removeListener("change", this.getTodos.bind(this));
   }
 
-  onTabClick(index) {
+  handleTabClick(index) {
     switch(index) {
-      case 0: TodoActions.selectAll();    break;
-      case 1: TodoActions.selectDone();   break;
-      case 2: TodoActions.selectActive(); break;
+      case 0: return TodoActions.selectActive;    break;
+      case 1: return TodoActions.selectDone;   break;
+      case 2: return TodoActions.selectAll; break;
     }
   }
 
@@ -50,7 +50,7 @@ export default class TodoContainer extends React.Component {
 
     return (
       <div className = "todoContainer" >
-        <Tabs tabs = {this.tabs} onClick = {this.onTabClick} active = {active}/>
+        <Tabs tabs = {this.tabs} createOnClick = {this.handleTabClick} active = {active}/>
         <TodoForm />
         <TodoList todos = {todos} />
       </div>

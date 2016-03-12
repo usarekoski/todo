@@ -9,12 +9,12 @@ export default class Tabs extends React.Component {
   }
 
   render() {
-    const { active, tabs, onClick } = this.props;
+    const { active, tabs, createOnClick } = this.props;
 
     const tabComponents = tabs.map( (text, index) => {
       return <li
         key = {index}
-        onClick = {onClick}
+        onClick = {createOnClick(index)}
         className = {classNames({"active": index === active})} >
         {text}
       </li>
