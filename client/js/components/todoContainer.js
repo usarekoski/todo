@@ -1,4 +1,5 @@
 import React from "react";
+import {Container} from 'flux/utils';
 
 import TodoStore from "../stores/todoStore";
 import TodoConstants from "../constants/todoConstants";
@@ -14,12 +15,12 @@ export default class TodoContainer extends React.Component {
 
   constructor() {
     super();
-    this.state = {todos: TodoStore.getAll(), selected: TodoStore.selected};
     this.tabs = ["ACTIVE", "DONE", "ALL"];
+    this.state = {todos: [], selected: 2};
   }
 
   getTodos() {
-    this.setState({todos: TodoStore.getAll(), selected: TodoStore.selected});
+    this.setState({todos: TodoStore.getAll()});
   }
 
   componentWillMount() {
@@ -31,34 +32,33 @@ export default class TodoContainer extends React.Component {
   }
 
   handleTabClick(index) {
-    switch(index) {
-      case 0: return TodoActions.selectActive; break;
-      case 1: return TodoActions.selectDone;   break;
-      case 2: return TodoActions.selectAll;    break;
-    }
+    return (function() {
+      this.setState({selected: index});
+    }).bind(this)
   }
 
   render() {
 
     const { todos, selected } = this.state;
-    let active;
 
-    switch(selected) {
-      case TodoConstants.SELECT_ACTIVE: active = 0; break;
-      case TodoConstants.SELECT_DONE:   active = 1; break;
-      case TodoConstants.SELECT_ALL:    active = 2; break;
-    }
+    const filteredTodos = todos.filter((todo, id) => {
+      switch(selected) {
+        case 0: return todo.done === false; // Active
+        case 1: return todo.done === true; // Done
+        case 2: return true; // All
+      }
+    });
 
     return (
       <div className = "todoContainer" >
         <SaveTodos />
         <Tabs
           tabs = {this.tabs}
-          createOnClick = {this.handleTabClick}
-          active = {active}
+          createOnClick = {this.handleTabClick.bind(this)}
+          active = {selected}
         />
         <TodoForm />
-        <TodoList todos = {todos} />
+        <TodoList todos = {filteredTodos} />
       </div>
     );
   }

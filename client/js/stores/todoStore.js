@@ -9,7 +9,6 @@ class TodoStore extends EventEmitter {
   constructor() {
     super();
     this.todos = [];
-    this.selected = TodoConstants.SELECT_ALL;
   }
 
   createTodo(text) {
@@ -33,17 +32,7 @@ class TodoStore extends EventEmitter {
   };
 
   getAll() {
-    switch(this.selected) {
-      case TodoConstants.SELECT_ACTIVE:
-        return this.todos.filter((todo, id) => todo.done === false)
-        break;
-      case TodoConstants.SELECT_ALL:
-        return this.todos
-        break;
-      case TodoConstants.SELECT_DONE:
-        return this.todos.filter((todo, id) => todo.done === true)
-        break;
-    }
+    return this.todos;
   }
 
   handleActions(action) {
@@ -56,18 +45,6 @@ class TodoStore extends EventEmitter {
         break;
       case TodoConstants.TODO_DONE:
         this.markTodoDone(action.id);
-        break;
-      case TodoConstants.SELECT_ACTIVE:
-        this.selected = TodoConstants.SELECT_ACTIVE
-        this.emit("change");
-        break;
-      case TodoConstants.SELECT_ALL:
-        this.selected = TodoConstants.SELECT_ALL
-        this.emit("change");
-        break;
-      case TodoConstants.SELECT_DONE:
-        this.selected = TodoConstants.SELECT_DONE
-        this.emit("change");
         break;
     }
   }
