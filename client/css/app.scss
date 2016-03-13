@@ -1,9 +1,18 @@
 $font-stack: 'Lato', sans-serif;
-$text-color: #242B2E;
-$primary-color: #D1BE7B;
-$secondary-color: #CC5C37;
+$text-color: #05052B;
+$text-inactive-color: #7F7F7F;
+$primary-color: #1133DD;
+$secondary-color: #E5E5E5;
+$todo-height: 50px;
+$todo-font-size: 24px;
 
 body, html {
   font: 100% $font-stack;
   color: $text-color;
 }
+
+@import "components/header.scss";
+@import "components/tabs.scss";
+@import "components/todoContainer.scss";
+@import "components/todoForm.scss";
+@import "components/todo.scss";
