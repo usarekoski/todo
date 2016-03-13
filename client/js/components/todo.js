@@ -22,8 +22,9 @@ export default class Todo extends React.Component {
             onChange = {onDoneClick}
             checked = {done}
           />
-          {text}
+          <i className = "fa fa-check"></i>
         </label>
+        <div className="content">{text}</div>
         <a className = "remove" onClick = {onDeleteClick}>
           <i className = "fa fa-times"></i>
         </a>

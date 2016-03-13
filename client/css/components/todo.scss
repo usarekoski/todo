@@ -1,0 +1,53 @@
+.todo {
+  width: 100%;
+  height: $todo-height;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $secondary-color;
+
+  // Hide default checkbox
+  label input[type="checkbox"] {
+    display: none;
+  }
+
+  // Label acts as a checkbox
+  label i {
+    height: $todo-height;
+    width: $todo-height;
+    font-size: 30px;
+    color: $text-inactive-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content {
+    font-size: $todo-font-size;
+    margin-left: 10px;
+    width: 85%;
+  }
+
+  .remove {
+    color: $text-inactive-color;
+    font-size: 20px;
+    height: $todo-height;
+    width: $todo-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+.done {
+
+  .content {
+    text-decoration: line-through;
+    color: $text-inactive-color;
+  }
+
+  label i {
+    color: $primary-color;
+  }
+}
