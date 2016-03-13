@@ -7,6 +7,7 @@ import * as TodoActions from "../actions/todoActions";
 import TodoList from "./todoList";
 import TodoForm from "./todoForm";
 import Tabs from "./tabs";
+import SaveTodos from "./saveTodos";
 
 
 export default class TodoContainer extends React.Component {
@@ -50,6 +51,7 @@ export default class TodoContainer extends React.Component {
 
     return (
       <div className = "todoContainer" >
+        <SaveTodos />
         <Tabs
           tabs = {this.tabs}
           createOnClick = {this.handleTabClick}
