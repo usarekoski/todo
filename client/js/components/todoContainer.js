@@ -14,7 +14,7 @@ export default class TodoContainer extends React.Component {
   constructor() {
     super();
     this.state = {todos: TodoStore.getAll(), selected: TodoStore.selected};
-    this.tabs = ["Active", "Done", "All"];
+    this.tabs = ["ACTIVE", "DONE", "ALL"];
   }
 
   getTodos() {
@@ -31,9 +31,9 @@ export default class TodoContainer extends React.Component {
 
   handleTabClick(index) {
     switch(index) {
-      case 0: return TodoActions.selectActive;    break;
+      case 0: return TodoActions.selectActive; break;
       case 1: return TodoActions.selectDone;   break;
-      case 2: return TodoActions.selectAll; break;
+      case 2: return TodoActions.selectAll;    break;
     }
   }
 
@@ -50,7 +50,11 @@ export default class TodoContainer extends React.Component {
 
     return (
       <div className = "todoContainer" >
-        <Tabs tabs = {this.tabs} createOnClick = {this.handleTabClick} active = {active}/>
+        <Tabs
+          tabs = {this.tabs}
+          createOnClick = {this.handleTabClick}
+          active = {active}
+        />
         <TodoForm />
         <TodoList todos = {todos} />
       </div>
