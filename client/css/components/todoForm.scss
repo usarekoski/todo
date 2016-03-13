@@ -1,0 +1,29 @@
+#todoForm {
+    background-color: $secondary-color;
+    display: flex;
+
+    i {
+      height: $todo-height;
+      width: $todo-height;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      color: $text-inactive-color;
+    }
+
+    input {
+      width: 100%;
+      height: $todo-height;
+      border: none;
+      background-color: inherit;
+      font-family: $font-stack;
+      font-size: $todo-font-size;
+      padding: 0 10px;
+      box-sizing: border-box;
+
+      &:focus {
+        border: none;
+        outline: 0;
+      }
+    }
+}

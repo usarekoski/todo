@@ -22,6 +22,7 @@ export default class TodoForm extends React.Component {
   render() {
     return (
       <form id="todoForm" onSubmit={this.handleSubmit.bind(this)}>
+        <i className = "fa fa-chevron-right"></i>
         <input
           id="name"
           type="text"
@@ -32,5 +33,5 @@ export default class TodoForm extends React.Component {
       </form>
     );
   }
-  
+
 }
