@@ -1,58 +1,48 @@
-import { EventEmitter } from "events";
-
+import { ReduceStore } from 'flux/utils';
 
 import dispatcher from "../dispatcher";
 import TodoConstants from "../constants/todoConstants";
 
-class TodoStore extends EventEmitter {
+class TodoStore extends ReduceStore {
 
-  constructor() {
-    super();
-    this.todos = [];
+  getInitialState() {
+    return {todos: []};
   }
 
-  createTodo(text) {
-    this.todos.push({
-      "text": text,
-      "done": false
-    });
-    this.emit("change");
-  };
-
-  deleteTodo(id) {
-    this.todos.splice(id, 1);
-    this.emit("change");
-  };
-
-  markTodoDone(id) {
-    let todo = this.todos[id];
-    todo.done = !todo.done;
-    this.todos[id] = todo;
-    this.emit("change");
-  };
-
-  getAll() {
-    return this.todos;
-  }
-
-  handleActions(action) {
+  reduce(state, action) {
     switch(action.type) {
       case TodoConstants.TODO_CREATE:
-        this.createTodo(action.text);
-        break;
+        return Object.assign({}, state,
+           {todos: [
+             ...state.todos,
+             {
+               id: action.id,
+               text: action.text,
+               done: false
+             }
+           ]
+        });
       case TodoConstants.TODO_DELETE:
-        this.deleteTodo(action.id);
-        break;
+        return Object.assign({}, state,
+          {todos: state.todos.filter(todo => todo.id !== action.id)}
+        );
       case TodoConstants.TODO_DONE:
-        this.markTodoDone(action.id);
-        break;
+        return Object.assign({}, state,
+          {todos: state.todos.map(todo => {
+            if (todo.id === action.id) {
+              let newTodo = todo;
+              newTodo.done = !todo.done;
+              return newTodo;
+            } else {
+              return todo;
+            }
+          })}
+        );
     }
   }
 
 }
 
-const todoStore = new TodoStore;
-
-dispatcher.register(todoStore.handleActions.bind(todoStore));
+const todoStore = new TodoStore(dispatcher);
 
 export default todoStore;

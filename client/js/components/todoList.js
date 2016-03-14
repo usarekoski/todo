@@ -19,15 +19,13 @@ export default class TodoList extends React.Component {
 
     const { todos } = this.props;
 
-    const todoComponents = Array.from(todos.entries(), value => {
-      let todo = value[1];
-      let id = value[0];
+    const todoComponents = todos.map(todo => {
       return <Todo
-          key = {id}
+          key = {todo.id}
           text = {todo.text}
           done = {todo.done}
-          onDoneClick = {this.handleDoneClick.bind(this, id)}
-          onDeleteClick = {this.handleDeleteClick.bind(this, id)}
+          onDoneClick = {this.handleDoneClick.bind(this, todo.id)}
+          onDeleteClick = {this.handleDeleteClick.bind(this, todo.id)}
         />;
     });
 

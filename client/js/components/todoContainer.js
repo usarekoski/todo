@@ -20,15 +20,15 @@ export default class TodoContainer extends React.Component {
   }
 
   getTodos() {
-    this.setState({todos: TodoStore.getAll()});
+    this.setState({todos: TodoStore.getState().todos});
   }
 
   componentWillMount() {
-    TodoStore.on("change", this.getTodos.bind(this));
+    this.listener = TodoStore.addListener(this.getTodos.bind(this));
   }
 
   componentWillUnmount() {
-    TodoStore.removeListener("change", this.getTodos.bind(this));
+    this.listener.remove();
   }
 
   handleTabClick(index) {
@@ -41,7 +41,7 @@ export default class TodoContainer extends React.Component {
 
     const { todos, selected } = this.state;
 
-    const filteredTodos = todos.filter((todo, id) => {
+    const filteredTodos = todos.filter(todo => {
       switch(selected) {
         case 0: return todo.done === false; // Active
         case 1: return todo.done === true; // Done
