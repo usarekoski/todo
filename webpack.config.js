@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require("webpack");
 
 
 module.exports = {
@@ -9,10 +10,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
+        loaders: ['react-hot', 'babel-loader']
       },
       {
         test: /\.scss$/,
@@ -32,6 +30,10 @@ module.exports = {
   output: {
     path: path.join(__dirname, "public"),
     filename: "bundle.min.js",
-  }
+  },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 
 };
