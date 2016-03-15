@@ -60,9 +60,45 @@ function save_success(id) {
 }
 
 function save_fail(text) {
-  console.log(text);
   dispatcher.dispatch({
     type: TodoConstants.SAVE_FAIL,
+    text: text
+  });
+}
+
+
+export function loadTodos(id) {
+  let init = {
+    method: "GET",
+  };
+  let request = new Request("api/todos/" + id, init);
+
+  fetch(request).then(function(response) {
+    if (response.ok) {
+      response.json().then(function(json) {
+        if (json.error) {
+          load_fail(json.error);
+        } else {
+          load_success(JSON.parse(json));
+        }
+      });
+    } else {
+      load_fail("Connection failed.");
+    }
+  });
+
+}
+
+function load_success(json) {
+  dispatcher.dispatch({
+    type: TodoConstants.LOAD_SUCCESS,
+    todos: json
+  });
+}
+
+function load_fail(text) {
+  dispatcher.dispatch({
+    type: TodoConstants.LOAD_FAIL,
     text: text
   });
 }
