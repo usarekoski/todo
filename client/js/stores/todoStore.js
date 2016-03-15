@@ -52,6 +52,16 @@ class TodoStore extends ReduceStore {
           {saveStatus: action.text}
         );
 
+      case TodoConstants.LOAD_SUCCESS:
+        return Object.assign({}, state,
+          {todos: action.todos, saveId: action.id, saveStatus: "Saved"}
+        );
+
+      case TodoConstants.LOAD_FAIL:
+        return Object.assign({}, state,
+          {saveStatus: action.text}
+        );
+
       default:
         return state;
 

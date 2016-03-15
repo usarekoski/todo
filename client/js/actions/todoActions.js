@@ -79,7 +79,8 @@ export function loadTodos(id) {
         if (json.error) {
           load_fail(json.error);
         } else {
-          load_success(JSON.parse(json));
+          console.log(json);
+          load_success(json.todos, json.id);
         }
       });
     } else {
@@ -89,10 +90,12 @@ export function loadTodos(id) {
 
 }
 
-function load_success(json) {
+function load_success(todos, id) {
+
   dispatcher.dispatch({
     type: TodoConstants.LOAD_SUCCESS,
-    todos: json
+    todos: todos,
+    id: id
   });
 }
 
