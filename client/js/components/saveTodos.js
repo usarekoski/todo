@@ -8,10 +8,15 @@ export default class SaveTodos extends React.Component {
     super();
   }
 
+  handleSaveClick() {
+    TodoActions.saveTodos();
+  }
+
   render() {
     return (
       <div className="saveTodos">
-        <a>Save</a>
+        <a onClick={this.handleSaveClick.bind(this)}>Save</a>
+        {this.props.saveId}
       </div>
     );
   }
