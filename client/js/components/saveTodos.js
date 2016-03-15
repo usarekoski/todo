@@ -16,7 +16,8 @@ export default class SaveTodos extends React.Component {
     return (
       <div className="saveTodos">
         <a onClick={this.handleSaveClick.bind(this)}>Save</a>
-        {this.props.saveId}
+        <p>{this.props.saveStatus}</p>
+        <p>{this.props.saveId}</p>
       </div>
     );
   }

@@ -6,11 +6,12 @@ import TodoConstants from "../constants/todoConstants";
 class TodoStore extends ReduceStore {
 
   getInitialState() {
-    return {todos: [], saveId: ""};
+    return {todos: [], saveId: "", saveStatus: "Not saved"};
   }
 
   reduce(state, action) {
     switch(action.type) {
+
       case TodoConstants.TODO_CREATE:
         return Object.assign({}, state,
            {todos: [
@@ -43,7 +44,12 @@ class TodoStore extends ReduceStore {
 
       case TodoConstants.SAVE_SUCCESS:
         return Object.assign({}, state,
-          {todos: state.todos, saveId: action.id}
+          {saveId: action.id, saveStatus: "Saved"}
+        );
+
+      case TodoConstants.SAVE_FAIL:
+        return Object.assign({}, state,
+          {saveStatus: action.text}
         );
 
       default:

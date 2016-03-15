@@ -16,12 +16,12 @@ export default class TodoContainer extends React.Component {
   constructor() {
     super();
     this.tabs = ["ACTIVE", "DONE", "ALL"];
-    this.state = {todos: [], selected: 2, saveId: ""};
+    this.state = {todos: [], selected: 2, saveId: "", saveStatus: ""};
   }
 
   getTodos() {
     let state = TodoStore.getState()
-    this.setState({todos: state.todos, saveId: state.saveId});
+    this.setState({todos: state.todos, saveId: state.saveId, saveStatus: state.saveStatus});
   }
 
   componentWillMount() {
@@ -40,7 +40,7 @@ export default class TodoContainer extends React.Component {
 
   render() {
 
-    const { todos, selected, saveId } = this.state;
+    const { todos, selected, saveId, saveStatus } = this.state;
 
     const filteredTodos = todos.filter(todo => {
       switch(selected) {
@@ -52,7 +52,7 @@ export default class TodoContainer extends React.Component {
 
     return (
       <div className = "todoContainer" >
-        <SaveTodos saveId={saveId}/>
+        <SaveTodos saveId={saveId} saveStatus={saveStatus}/>
         <Tabs
           tabs = {this.tabs}
           createOnClick = {this.handleTabClick.bind(this)}
