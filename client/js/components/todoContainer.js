@@ -17,6 +17,7 @@ export default class TodoContainer extends React.Component {
     super();
     this.tabs = ["ACTIVE", "DONE", "ALL"];
     this.state = {todos: [], selected: 2, saveId: "", saveStatus: ""};
+    this.handleUrlId(); // Check the url when user loads the page.
   }
 
   getTodos() {
@@ -30,6 +31,13 @@ export default class TodoContainer extends React.Component {
 
   componentWillUnmount() {
     this.listener.remove();
+  }
+
+  handleUrlId() {
+    let hash = window.location.hash;
+    if (hash != "") {
+      TodoActions.loadTodos(hash.slice(1));
+    }
   }
 
   handleTabClick(index) {
