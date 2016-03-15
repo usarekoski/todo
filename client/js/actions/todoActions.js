@@ -25,3 +25,44 @@ export function markTodoDone(id) {
     id: id
   });
 }
+
+export function saveTodos(id) {
+  let todos = TodoStore.getState().todos;
+  var blob = new Blob([JSON.stringify(todos)], {type : 'application/json'});
+  let init = {
+    method: "POST",
+    body: blob
+  };
+  let request = new Request("api/todos/add", init);
+
+  fetch(request).then(function(response) {
+    if (response.ok) {
+      response.json().then(function(json) {
+        if (json.id) {
+          save_success(json.id);
+        } else {
+          save_fail(json.error);
+        }
+      });
+    } else {
+      save_fail("Connection failed.");
+    }
+  });
+
+}
+
+function save_success(id) {
+  window.location.hash = id;
+  dispatcher.dispatch({
+    type: TodoConstants.SAVE_SUCCESS,
+    id: id
+  });
+}
+
+function save_fail(text) {
+  console.log(text);
+  dispatcher.dispatch({
+    type: TodoConstants.SAVE_FAIL,
+    text: text
+  });
+}

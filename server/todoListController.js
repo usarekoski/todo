@@ -17,17 +17,17 @@ router.get("/:id", function(req, res) {
 });
 
 router.post("/add", function(req, res) {
-   var todoList = new TodoList();
-   console.log(req.body);
-   todoList.todos = req.body;
-   todoList.save(function(err) {
-     if (err) {
-       console.log(err);
-       res.json({error: "Saving to database failed."});
-     } else {
+  var todoList = new TodoList();
+  console.log(req.body);
+  todoList.todos = req.body;
+  todoList.save(function(err) {
+    if (err) {
+      console.log(err);
+      res.json({error: "Saving to database failed."});
+    } else {
       res.json({id: todoList.id});
-     }
-   });
+    }
+  });
 });
 
 module.exports = router;
