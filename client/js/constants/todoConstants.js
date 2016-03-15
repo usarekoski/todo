@@ -5,7 +5,9 @@ const TodoConstants = keyMirror({
   TODO_DELETE: null,
   TODO_DONE: null,
   SAVE_SUCCESS: null,
-  SAVE_FAIL: null
+  SAVE_FAIL: null,
+  LOAD_SUCCESS: null,
+  LOAD_FAIL: null
 });
 
 export default TodoConstants
