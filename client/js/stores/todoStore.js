@@ -6,7 +6,7 @@ import TodoConstants from "../constants/todoConstants";
 class TodoStore extends ReduceStore {
 
   getInitialState() {
-    return {todos: []};
+    return {todos: [], saveId: ""};
   }
 
   reduce(state, action) {
@@ -22,10 +22,12 @@ class TodoStore extends ReduceStore {
              }
            ]
         });
+
       case TodoConstants.TODO_DELETE:
         return Object.assign({}, state,
           {todos: state.todos.filter(todo => todo.id !== action.id)}
         );
+
       case TodoConstants.TODO_DONE:
         return Object.assign({}, state,
           {todos: state.todos.map(todo => {
@@ -38,6 +40,15 @@ class TodoStore extends ReduceStore {
             }
           })}
         );
+
+      case TodoConstants.SAVE_SUCCESS:
+        return Object.assign({}, state,
+          {todos: state.todos, saveId: action.id}
+        );
+
+      default:
+        return state;
+
     }
   }
 
