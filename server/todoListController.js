@@ -11,7 +11,6 @@ router.get("/:id", function(req, res) {
       console.log(err);
       res.json({error: "No save with this id."});
     } else {
-      console.log(todoList);
       res.json(todoList);
     }
   });
@@ -26,6 +25,25 @@ router.post("/add", function(req, res) {
       res.json({error: "Saving to database failed."});
     } else {
       res.json({id: todoList.id});
+    }
+  });
+});
+
+router.post("/:id", function(req, res) {
+  TodoList.findById(req.params.id, function(err, todoList) {
+    if (err) {
+      console.log(err);
+      res.json({error: "No save with this id."});
+    } else {
+      todoList.todos = req.body;
+      todoList.save(function(err) {
+        if (err) {
+          console.log(err);
+          res.json({error: "Saving to database failed."});
+        } else {
+          res.json({text: "Saved"});
+        }
+      });
     }
   });
 });
