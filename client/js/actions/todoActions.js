@@ -26,14 +26,25 @@ export function markTodoDone(id) {
   });
 }
 
-export function saveTodos(id) {
-  let todos = TodoStore.getState().todos;
+export function saveTodos() {
+  const { todos, saveId } = TodoStore.getState();
   var blob = new Blob([JSON.stringify(todos)], {type : 'application/json'});
   let init = {
     method: "POST",
     body: blob
   };
-  let request = new Request("api/todos/add", init);
+
+  let url;
+
+  if (saveId == "") {
+    // New save
+    url = "api/todos/add";
+  } else {
+    // Already saved, only update
+    url = "api/todos/" + saveId;
+  }
+
+  let request = new Request(url, init);
 
   fetch(request).then(function(response) {
     if (response.ok) {
