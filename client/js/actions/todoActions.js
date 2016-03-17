@@ -79,8 +79,11 @@ export function loadTodos(id) {
         if (json.error) {
           load_fail(json.error);
         } else {
-          console.log(json);
-          load_success(json.todos, json.id);
+          // Use mongodb _id as id
+          const todosWithId = json.todos.map(todo => {
+            return {text: todo.text, id: todo._id, done: todo.done};
+          });
+          load_success(todosWithId, json._id);
         }
       });
     } else {
