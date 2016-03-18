@@ -29,13 +29,17 @@
   }
 
   .remove {
-    color: $text-inactive-color;
+    color: white;
     font-size: 20px;
     height: $todo-height;
     width: $todo-height;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &:hover .remove {
+    color: $text-inactive-color;
   }
 
 }
