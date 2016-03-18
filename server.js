@@ -18,23 +18,28 @@ app.use("/api/todos", todoListController);
 
 // Serve static files in public directory
 if (DEV === "dev") {
-  // Use webpack-dev-server in development
+  // Use webpack-dev-server in development and proxy api requests.
   var webpack = require("webpack");
   var webpackDevServer = require("webpack-dev-server");
   var url = require("url");
-  var proxy = require('proxy-middleware');
 
   var config = require("./webpack.config.js");
   config.entry.app.unshift("webpack-dev-server/client?http://localhost:8000/", "webpack/hot/dev-server");
 
   // Webpack-dev-server on port 8000 with automatic reloading.
   var compiler = webpack(config);
-  // app.use('/', proxy(url.parse('http://localhost:8000/')));
   var server = new webpackDevServer(compiler, {
     contentBase: "./public",
-    hot: true
+    hot: true,
+    debug: true,
+    colors: true,
+    proxy: {
+      "/api/*": {
+        target: "http://localhost:8080"
+      }
+    }
   });
-  server.use('/api', proxy(url.parse('http://localhost:8080/api')));
+
   server.listen(8000, function() {
     console.log("Started webpack-dev-server on port: 8000");
   });
