@@ -13,11 +13,15 @@ export default class SaveTodos extends React.Component {
   }
 
   render() {
+
+
     return (
       <div className="saveTodos">
-        <a onClick={this.handleSaveClick.bind(this)}>Save</a>
-        <p>{this.props.saveStatus}</p>
-        <p>{this.props.saveId}</p>
+        <a className="save" onClick={this.handleSaveClick.bind(this)}>SAVE</a>
+        <div className="info">
+          <p className="status">Status: {this.props.saveStatus}</p>
+          <p className="url">{this.props.saveURL}</p>
+        </div>
       </div>
     );
   }
