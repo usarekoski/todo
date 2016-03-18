@@ -1,8 +1,10 @@
 const path = require('path');
 const webpack = require("webpack");
+const merge = require("webpack-merge");
 
+const DEV = process.env.NODE_ENV == "production" ? false : true;
 
-module.exports = {
+const common = {
   context: path.join(__dirname, "client"),
   entry: {app: ["./js/app.js"]},
   module: {
@@ -31,9 +33,16 @@ module.exports = {
     path: path.join(__dirname, "public"),
     filename: "bundle.min.js",
   },
+};
 
+const dev = {
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ]
+}
 
-};
+const prod = {
+
+}
+
+module.exports = merge(common, DEV ? dev : prod);
