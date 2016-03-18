@@ -41,7 +41,7 @@ router.post("/:id", function(req, res) {
           console.log(err);
           res.json({error: "Saving to database failed."});
         } else {
-          res.json({text: "Saved"});
+          res.json({id: todoList.id});
         }
       });
     }
