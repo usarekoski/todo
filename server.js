@@ -7,9 +7,10 @@ var todoListController = require("./server/todoListController");
 var app = express();
 var PORT = process.env.PORT || 8080;
 var DEV = process.env.NODE_ENV || 'dev';
+var MONGO_URL = process.env.MONGO_URL || "mongodb://localhost";
 
 // Connect to DB
-mongoose.connect('mongodb://localhost');
+mongoose.connect(MONGO_URL);
 
 app.use(bodyParser.json()); // for parsing application/json
 
