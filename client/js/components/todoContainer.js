@@ -16,13 +16,15 @@ export default class TodoContainer extends React.Component {
   constructor() {
     super();
     this.tabs = ["ACTIVE", "DONE", "ALL"];
-    this.state = {todos: [], selected: 2, saveId: "", saveStatus: ""};
+    let state = TodoStore.getState()
+    this.state = {todos: state.todos, saveId: state.saveId, saveStatus: state.saveStatus};
+    this.state.selected = 2;
     this.handleUrlId(); // Check the url when user loads the page.
   }
 
   getTodos() {
-    let state = TodoStore.getState()
-    this.setState({todos: state.todos, saveId: state.saveId, saveStatus: state.saveStatus});
+    let storeState = TodoStore.getState()
+    this.setState({todos: storeState.todos, saveId: storeState.saveId, saveStatus: storeState.saveStatus});
   }
 
   componentWillMount() {
@@ -50,6 +52,8 @@ export default class TodoContainer extends React.Component {
 
     const { todos, selected, saveId, saveStatus } = this.state;
 
+    const saveURL = saveId != "" ? window.location.href : ""
+
     const filteredTodos = todos.filter(todo => {
       switch(selected) {
         case 0: return todo.done === false; // Active
@@ -60,7 +64,7 @@ export default class TodoContainer extends React.Component {
 
     return (
       <div className = "todoContainer" >
-        <SaveTodos saveId={saveId} saveStatus={saveStatus}/>
+        <SaveTodos saveURL={saveURL} saveStatus={saveStatus}/>
         <Tabs
           tabs = {this.tabs}
           createOnClick = {this.handleTabClick.bind(this)}
