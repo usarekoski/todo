@@ -4,7 +4,7 @@ const webpack = require("webpack");
 
 module.exports = {
   context: path.join(__dirname, "client"),
-  entry: {app: ["./js/app.js",]},
+  entry: {app: ["./js/app.js"]},
   module: {
     loaders: [
       {
@@ -18,11 +18,11 @@ module.exports = {
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+        loader: "url-loader"
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
+        loader: "url-loader"
       }
     ]
   },
