@@ -21,25 +21,32 @@ class TodoStore extends ReduceStore {
                text: action.text,
                done: false
              }
-           ]
+           ],
+           saveStatus: "Not saved"
         });
 
       case TodoConstants.TODO_DELETE:
         return Object.assign({}, state,
-          {todos: state.todos.filter(todo => todo.id !== action.id)}
+          {
+            todos: state.todos.filter(todo => todo.id !== action.id),
+            saveStatus: "Not saved"
+          }
         );
 
       case TodoConstants.TODO_DONE:
         return Object.assign({}, state,
-          {todos: state.todos.map(todo => {
-            if (todo.id === action.id) {
-              let newTodo = todo;
-              newTodo.done = !todo.done;
-              return newTodo;
-            } else {
-              return todo;
-            }
-          })}
+          {
+            todos: state.todos.map(todo => {
+              if (todo.id === action.id) {
+                let newTodo = todo;
+                newTodo.done = !todo.done;
+                return newTodo;
+              } else {
+                return todo;
+              }
+            }),
+            saveStatus: "Not saved"
+          }
         );
 
       case TodoConstants.SAVE_SUCCESS:
