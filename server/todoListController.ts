@@ -22,13 +22,13 @@ async function setupDB() {
 
   return {
     beginTransaction: await sqlite.prepare(db, `
-      BEGIN TRANSACTION`,
+      BEGIN TRANSACTION;`,
     ),
     endTransaction: await sqlite.prepare(db, `
-      COMMIT`,
+      COMMIT;`,
     ),
     rollback: await sqlite.prepare(db, `
-      ROLLBACK`,
+      ROLLBACK;`,
     ),
     getList: await sqlite.prepare(db, `
       SELECT list_id, item_id, text, done
