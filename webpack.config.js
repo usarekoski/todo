@@ -5,27 +5,24 @@ const merge = require("webpack-merge");
 const DEV = process.env.NODE_ENV == "production" ? false : true;
 
 const common = {
-  context: path.join(__dirname, "client"),
-  entry: {app: ["./js/app.js"]},
+  entry: {
+    app: ["./client/js/app"]
+  },
+  devtool: 'inline-source-map',
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".json"]
+  },
+  target: 'web',
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loaders: ['react-hot', 'babel-loader']
+        test: /\.tsx?$/,
+        loader: "ts-loader",
+        query: {
+          configFile: 'tsconfig.client.json',
+          onlyCompileBundledFiles: true,
+        }
       },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
-      },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader"
-      },
-      {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader"
-      }
     ]
   },
 
@@ -36,13 +33,14 @@ const common = {
 };
 
 const dev = {
+  mode: 'development',
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    // new webpack.HotModuleReplacementPlugin()
   ]
 }
 
 const prod = {
-
+  mode: 'production',
 }
 
 module.exports = merge(common, DEV ? dev : prod);

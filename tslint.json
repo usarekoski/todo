@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-no-circular-imports"
+  ],
+  "rules": {
+    "quotemark": {
+      "options": [
+        "single",
+        "avoid-escape",
+        "jsx-double",
+        "avoid-template"
+      ]
+    },
+    "object-literal-sort-keys": false,
+    "interface-over-type-literal": false,
+    "max-line-length": [
+      true,
+      100
+    ],
+    "no-console": false,
+    "member-access": false,
+    "ordered-imports": false
+  }
+}
